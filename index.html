@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dosa Batter Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #fff7ed;
+            font-family: Arial, sans-serif;
+            color: #292524;
+        }
+
+        .app {
+            max-width: 450px;
+            margin: 15px auto;
+        }
+
+        header {
+            text-align: center;
+            color: #9a3412;
+            margin-bottom: 22px;
+        }
+
+        .screen {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px #00000010;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin: 17px 0 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d6d3d1;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: 0;
+            border-radius: 9px;
+            background: #c2410c;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #57534e;
+        }
+
+        .final-price {
+            background: #fff0d9;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .final-price small {
+            display: block;
+            color: #78716c;
+        }
+
+        .final-price strong {
+            display: block;
+            font-size: 32px;
+            color: #9a3412;
+            margin-top: 8px;
+        }
+
+        .line {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid #eee7df;
+        }
+
+        .line span:last-child {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .note {
+            color: #78716c;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 18px;
+        }
+
+        #error {
+            color: #b91c1c;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="app">
+
+    <header>
+        <h1>Dosa Batter</h1>
+        <p>Cost Calculator</p>
+    </header>
+
+    <!-- SCREEN 1: INPUTS -->
+    <section id="inputScreen" class="screen">
+        <h2>Enter Today's Prices</h2>
+
+        <label for="riceBag">
+            Adukkumalli rice — 26 kg bag price (₹)
+        </label>
+        <input id="riceBag" type="number" min="0"
+               step="any" placeholder="Enter bag price">
+
+        <label for="dalBag">
+            Dal — 50 kg bag price (₹)
+        </label>
+        <input id="dalBag" type="number" min="0"
+               step="any" placeholder="Enter bag price">
+
+        <label for="normalRice">
+            Normal rice — price per kg (₹)
+        </label>
+        <input id="normalRice" type="number" min="0"
+               step="any" placeholder="Enter current price">
+
+        <label for="cover">
+            One empty cover price (₹)
+        </label>
+        <input id="cover" type="number" min="0"
+               step="any" placeholder="Enter cover price">
+
+        <p id="error" role="alert"></p>
+
+        <button onclick="calculateCost()">
+            Calculate Cost →
+        </button>
+
+        <p class="note">
+            Fixed recipe: 1.5 kg dal, 0.5 kg adukkumalli rice,
+            7.5 kg normal rice and 24 covers.
+        </p>
+    </section>
+
+    <!-- SCREEN 2: RESULTS -->
+    <section id="resultScreen" class="screen hidden">
+        <h2>Cost Summary</h2>
+
+        <div class="final-price">
+            <small>Calculated cost per cover</small>
+            <strong id="finalCost">₹0.00</strong>
+        </div>
+
+        <div class="line">
+            <span>Dal cost (1.5 kg)</span>
+            <span id="dalCost">₹0.00</span>
+        </div>
+
+        <div class="line">
+            <span>Adukkumalli rice (0.5 kg)</span>
+            <span id="riceCost">₹0.00</span>
+        </div>
+
+        <div class="line">
+            <span>Normal rice (7.5 kg)</span>
+            <span id="normalCost">₹0.00</span>
+        </div>
+
+        <div class="line">
+            <span>Total ingredient cost</span>
+            <span id="totalIngredients">₹0.00</span>
+        </div>
+
+        <div class="line">
+            <span>Ingredient cost per cover</span>
+            <span id="baseCost">₹0.00</span>
+        </div>
+
+        <div class="line">
+            <span>One empty cover</span>
+            <span id="coverCost">₹0.00</span>
+        </div>
+
+        <button class="secondary" onclick="goBack()">
+            ← Back to Enter Prices
+        </button>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
